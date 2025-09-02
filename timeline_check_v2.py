@@ -19,13 +19,14 @@ master_clean_path = downloads_path / f"haarvi_apts_{current_month}_{current_year
 
 cov_inf_columns = ["test_date",	"test_date_cov2", "test_date_cov3", "test_date_4", "test_date_5"]
 cov_vax_columns = ["date_dose_1", "date_dose_2","date_dose_3", "date_dose_4", "date_dose_5",	
-                   "date_dose_6", "date_dose_7", "date_dose_8", "date_dose_9", "date_dose_10"]
+                   "date_dose_6", "date_dose_7", "date_dose_8", "date_dose_9", "date_dose_10",
+                   "date_dose_11", "date_dose_12"]
 
 flu_inf_columns = ["test_date_flu_1", "test_date_flu_2"]
-flu_vax_columns = ["flu_vax_date", "flu_vax_date_2022_2023", "flu_vax_date_23_24", "flu_vax_date_24_25"]
+flu_vax_columns = ["flu_vax_date", "flu_vax_date_2022_2023", "flu_vax_date_23_24", "flu_vax_date_24_25", "flu_vax_date_y2526"]
 
-rsv_inf_columns = ["test_date_rsv_1"]
-rsv_vax_columns = ["rsv_vax_date_23_24", "rsv_vax_date_24_25"]
+rsv_inf_columns = ["test_date_rsv_1", "test_date_rsv2"]
+rsv_vax_columns = ["rsv_vax_date_23_24", "rsv_vax_date_24_25", "rsv_vax_date_y2526"]
 
 date_columns = [cov_inf_columns, cov_vax_columns, flu_inf_columns, flu_vax_columns,
                  rsv_inf_columns, rsv_vax_columns]
@@ -360,7 +361,7 @@ check_for_apts(master_raw, 'cov_inf', cov_inf_columns, ['30d','3m','6m'])
 check_for_apts(master_raw, 'flu_vax', flu_vax_columns, ['30d','3m','6m'])
 check_for_apts(master_raw, 'flu_inf', flu_inf_columns, ['30d','3m','6m'])
 check_for_apts(master_raw, 'rsv_vax', rsv_vax_columns, ['30d','3m','6m', '12m', '18m', '24m'])
-check_for_apts(master_raw, 'rsv_inf', rsv_vax_columns, ['30d','3m','6m', '12m', '18m', '24m'])
+check_for_apts(master_raw, 'rsv_inf', rsv_inf_columns, ['30d','3m','6m', '12m', '18m', '24m'])
 
 clean_cols = ['global_study_id','ptid','participant_email', 'age','Date_Collected','eligible_apts']
 invalid_idxs = [] 
@@ -372,6 +373,7 @@ if invalid_idxs:
     master_clean.drop(index = invalid_idxs, inplace = True)
 
 master_clean.to_csv(master_clean_path, index=False)
+
 
 
 
